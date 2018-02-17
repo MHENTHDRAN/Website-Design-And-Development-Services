@@ -1,0 +1,687 @@
+<?php
+
+session_start();
+if((!$_SESSION['uname'] == 'Chennai') and (!$_SESSION['uname'] == 'Bangalore'))
+{
+	header('location:login.php');
+	session_destroy();
+}
+else{
+if($_SESSION['uname'] == 'Chennai')
+	{
+		
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" type="image/png" sizes="16x16" href="plugins/images/logo.png">
+    <title><?php echo $_SESSION['uname'];?></title>
+    <!-- Bootstrap Core CSS -->
+    <link href="bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Menu CSS -->
+    <link href="plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.css" rel="stylesheet">
+    <!-- toast CSS -->
+    <!-- morris CSS -->
+    <link href="plugins/bower_components/morrisjs/morris.css" rel="stylesheet">
+    <!-- chartist CSS -->
+    <link href="plugins/bower_components/chartist-js/dist/chartist.min.css" rel="stylesheet">
+    <link href="plugins/bower_components/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.css" rel="stylesheet">
+    <!-- animation CSS -->
+    <link href="css/animate.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="css/style.css" rel="stylesheet">
+    <!-- color CSS -->
+    <link href="css/colors/default.css" id="theme" rel="stylesheet">
+   
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+</head>
+
+<body class="fix-header">
+    <!-- ============================================================== -->
+    <!-- Preloader -->
+    <!-- ============================================================== -->
+    <div class="preloader">
+        <svg class="circular" viewBox="25 25 50 50">
+            <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" />
+        </svg>
+    </div>
+    <!-- ============================================================== -->
+    <!-- Wrapper -->
+    <!-- ============================================================== -->
+    <div id="wrapper">
+        <!-- ============================================================== -->
+        <!-- Topbar header - style you can find in pages.scss -->
+        <!-- ============================================================== -->
+        <nav class="navbar navbar-default navbar-static-top m-b-0">
+            <div class="navbar-header" style="    background: #ec4c00;">
+                <div class="top-left-part" style="border-bottom: 4px solid #ec4c00;    background-color: #ec4c00;    border-bottom-left-radius: 35px;">
+                    <!-- Logo -->
+                    <a class="logo" href="index.php">
+                        <!-- Logo icon image, you can use font-icon also --><b>
+              <!--This is dark logo icon--><img src="plugins/images/logo.png" alt="home" style="    width: 50px;" class="dark-logo" /><!--This is light logo icon--><img src="plugins/images/logo.png" style="    width: 50px;" alt="home" class="light-logo" />
+                               </b>
+                        <!-- Logo text image you can use text also --><span class="hidden-xs">
+                      <!--This is light logo text--><h3 class="light-logo" style="    font-family: initial;
+    font-weight: bold;color:white;font-size:20px;"><?php echo $_SESSION['uname'];?>&nbsp;&nbsp;Admin</h3>
+                     </span> </a>
+                </div>
+                <!-- /Logo -->
+                <ul class="nav navbar-top-links navbar-right pull-right">
+                   
+                    <li>
+                        <a class="profile-pic" href="logout.php"> <img src="plugins/images/logout.png" alt="user-img" width="36" ><b class="hidden-xs">LogOut</b></a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-header -->
+            <!-- /.navbar-top-links -->
+            <!-- /.navbar-static-side -->
+        </nav>
+        <!-- End Top Navigation -->
+        <!-- ============================================================== -->
+        <!-- Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        <div class="navbar-default sidebar" role="navigation">
+            <div class="sidebar-nav slimscrollsidebar">
+                <div class="sidebar-head">
+                    <h3><span class="fa-fw open-close"><i class="ti-close ti-menu"></i></span> <span class="hide-menu">Navigation</span></h3>
+                </div>
+               <ul class="nav" id="side-menu">
+                    <li style="padding: 70px 0 0;">
+                        <a href="index.php" class="waves-effect"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i>Dashboard</a>
+                    </li>
+                    <li>
+                        <a href="insert.php" class="waves-effect"><i class="fa fa-upload fa-fw" aria-hidden="true"></i>File Upload</a>
+                    </li>
+                    <li>
+                        <a href="report.php" class="waves-effect"><i class="fa fa-table fa-fw" aria-hidden="true"></i>Report Details</a>
+                    </li>
+                   <li>
+                        <a href="working.php" class="waves-effect"><i class="material-icons">layers </i> Working  Details</a>
+                    </li>
+					<li>
+                        <a href="not_working.php" class="waves-effect"><i class="material-icons">layers_clear</i> Not Working Details</a>
+                    </li>
+					<li>
+                        <a href="monthly_report.php" class="waves-effect"><i class="material-icons">date_range</i> Monthly Report</a>
+                    </li>
+                </ul>
+               
+            </div>
+            
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Left Sidebar -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Page Content -->
+        <!-- ============================================================== -->
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                                                <div class="row">
+                    <div class="col-md-4 col-xs-12" style="    min-width: 50.333333%;
+    left: 150px;    padding-left: 0px;
+    padding-right: 0px;" >
+                        <div class="white-box">
+                           
+                         
+                                <div class="col-md-4 col-sm-4 text-center">
+                                  <div id="chart" ></div>
+								</div>
+                               
+                            
+                        </div>
+                    </div>
+                    <div class="col-md-8 col-xs-12" style="    width: 50.666667%;    left:150px; bottom:65px;  padding-left: 0px;
+    padding-right: 0px;">
+                        <div class="white-box">
+                           
+                                <div class="col-md-4 col-sm-4 text-center" style="    width: 52.333333%;">
+                                  <div id="chart1" ></div>
+									</div>
+                            </div>   
+                    </div>
+                </div>
+              
+            </div>
+			      <!-- /.container-fluid -->
+            <footer class="footer text-center"> 2017 &copy; Plexus.net.in</footer>
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Page Content -->
+        <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Wrapper -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- All Jquery -->
+    <!-- ============================================================== -->
+    <script src="plugins/bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- Menu Plugin JavaScript -->
+    <script src="plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js"></script>
+    <!--slimscroll JavaScript -->
+    <script src="js/jquery.slimscroll.js"></script>
+    <!--Wave Effects -->
+    <script src="js/waves.js"></script>
+    <!--Counter js -->
+    <script src="plugins/bower_components/waypoints/lib/jquery.waypoints.js"></script>
+    <script src="plugins/bower_components/counterup/jquery.counterup.min.js"></script>
+    <!-- chartist chart -->
+    <script src="plugins/bower_components/chartist-js/dist/chartist.min.js"></script>
+    <script src="plugins/bower_components/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.min.js"></script>
+    <!-- Sparkline chart JavaScript -->
+    <script src="plugins/bower_components/jquery-sparkline/jquery.sparkline.min.js"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="js/custom.min.js"></script>
+    <script src="js/dashboard1.js"></script>
+    <script src="plugins/bower_components/toast-master/js/jquery.toast.js"></script>
+</body>
+
+</html>
+<?php
+include('conn.php');
+
+$sql  = "SELECT * FROM `chennai_chart_report` where Name LIKE '%total%'";
+$res=$conn->query($sql);
+while($row=mysqli_fetch_assoc($res))
+{
+?>
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
+ <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+ 
+<script>
+/**
+ * Selector for chart element.
+ */
+var chartSelector = '#chart';
+var chartSelector1 = '#chart1';
+
+
+/**
+ * Selector used to get label elements inside the rendered chart.
+ * Your mileage may vary if you configure your chart different than
+ * me. Use Firebug or Developer Tools to step through the SVG and
+ * determine your label selector.
+ */
+var labelSelector = '> g:eq(1) g text';
+
+/**
+ * This is our data. For simplicity sake, doing inline and not AJAX.
+ */
+var data = [
+  [ 'Single Tables', <?php echo $row['Single Tables'];?>],
+  [ 'Double Tables', <?php echo $row['Double Tables'];?> ],
+  [ 'Rolling Chairs', <?php echo $row['Rolling Chairs'];?> ],
+  [ 'Plastic Chairs', <?php echo $row['Plastic Chairs'];?> ],
+   [ 'Printer', <?php echo $row['Printer'];?> ],
+  [ 'Scanner', <?php echo $row['Scanner'];?> ]
+];
+var labelSelector1 = '> g:eq(1) g text';
+
+var data1 = [
+  [ 'CPU / Plx Hydrabad', <?php echo $row['CPU/Plx_hydrabad'];?> ],
+  [ 'CPU / Plx Chennai', <?php echo $row['CPU/Plx_chennai'];?> ],
+  [ 'CPU / JAI', <?php echo $row['CPU/JAI'];?> ],
+  [ 'Monitor / Plx Hydrabad', <?php echo $row['Monitor/Plx_hydrabad'];?>],
+  [ 'Monitor / Plx Chennai', <?php echo $row['Monitor/Plx_chennai'];?>],
+  [ 'Monitor / JAI', <?php echo $row['Monitor/JAI'];?>],
+  [ 'Keyboard / Plx Hydrabad', <?php echo $row['Keyboard/Plx_hydrabad'];?> ],
+  [ 'Keyboard / Plx Chennai', <?php echo $row['Keyboard/Plx_chennai'];?> ],
+  [ 'Keyboard / JAI', <?php echo $row['Keyboard/JAI'];?> ],
+  [ 'Mouse / Plx Hydrabad', <?php echo $row['Mouse/Plx_hydrabad'];?> ],
+  [ 'Mouse / Plx Chennai', <?php echo $row['Mouse/Plx_chennai'];?> ],
+  [ 'Mouse / JAI', <?php echo $row['Mouse/JAI'];?> ],
+  [ 'Junction Box', <?php echo $row['Junction Box'];?> ]
+ 
+  
+];
+
+
+// Load Google Charts 
+google.charts.load('visualization', '1.1', { packages: ['corechart', 'line'] });
+
+// Callback when API is ready
+google.charts.setOnLoadCallback(function() {
+ 
+  /*
+   * Setup the data table with your data. 
+   */
+  var table = new google.visualization.DataTable({
+    cols : [
+      { id : 'name', label : 'Name', type : 'string' },
+      { id : 'value', label : 'Value', type : 'number' }
+    ]
+  });
+   var table1 = new google.visualization.DataTable({
+    cols : [
+      { id : 'name', label : 'Name', type : 'string' },
+      { id : 'value', label : 'Value', type : 'number' }
+    ]
+  });
+  // Add data to the table
+  table.addRows( data );
+  table1.addRows( data1 );
+  // Google Charts needs a raw element. I'm using jQuery to get the chart
+  // Container, then indexing into it to get the raw element.
+  var chartContainer = $(chartSelector)[0];
+  var chartContainer1 = $(chartSelector1)[0];
+  
+  // Create the Google Pie Chart
+  var chart = new google.visualization.PieChart(chartContainer);
+  var chart1 = new google.visualization.PieChart(chartContainer1);
+  
+  // Draw the chart.
+  chart.draw(table, { title : '<?php echo $_SESSION['uname']; ?> Table Reports','width':800,
+                       'height':550 });
+  chart1.draw(table1, { title : '<?php echo $_SESSION['uname'];?> CPU Reports','width':800,
+                       'height':550 });
+  
+  /*
+   * This is the meat and potatoes of the operation. We really require
+   * two things: #1) A selector that will get us a list of labels in the
+   * legend, and #2) The DataTable powering the chart.  We'll cycle
+   * through the labels, and use their index to lookup their value.
+   * If you have some higher-level math you need to do to display a
+   * different value, you can just replace my logic to get the count
+   * with your's.
+   */
+  
+  // The <svg/> element rendered by Google Charts
+  var svg = $('svg', chartContainer );
+  var svg1 = $('svg', chartContainer1 );
+  
+  /*
+   * Step through all the labels in the legend.
+   */
+  $(labelSelector, svg).each(function (i, v) {
+  
+    /*
+     * I'm retrieving the value of the second column in my data table,
+     * which contains the number that I want to display. If your logic
+     * is more complicated, change this line to calculate a new total.
+     */
+    var total = table.getValue(i, 1);
+    
+    // The new label text.
+    var newLabel = $(this).text() + '(' + total + ')';
+	
+    // Update the label text.
+    $(this).text( newLabel );
+  });
+  $(labelSelector1, svg1).each(function (i, v) {
+  
+    /*
+     * I'm retrieving the value of the second column in my data table,
+     * which contains the number that I want to display. If your logic
+     * is more complicated, change this line to calculate a new total.
+     */
+    var total1 = table1.getValue(i, 1);
+    
+    // The new label text.
+    var newLabel1 = $(this).text() + '(' + total1 + ')';
+	
+    // Update the label text.
+    $(this).text( newLabel1 );
+  });
+  
+});
+
+</script>
+
+<?php
+}
+	}
+	else if($_SESSION['uname'] == 'Bangalore'){
+		?>
+	<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" type="image/png" sizes="16x16" href="plugins/images/logo.png">
+    <title><?php echo $_SESSION['uname'];?></title>
+    <!-- Bootstrap Core CSS -->
+    <link href="bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Menu CSS -->
+    <link href="plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.css" rel="stylesheet">
+    <!-- toast CSS -->
+    <!-- morris CSS -->
+    <link href="plugins/bower_components/morrisjs/morris.css" rel="stylesheet">
+    <!-- chartist CSS -->
+    <link href="plugins/bower_components/chartist-js/dist/chartist.min.css" rel="stylesheet">
+    <link href="plugins/bower_components/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.css" rel="stylesheet">
+    <!-- animation CSS -->
+    <link href="css/animate.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="css/style.css" rel="stylesheet">
+    <!-- color CSS -->
+    <link href="css/colors/default.css" id="theme" rel="stylesheet">
+  
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+</head>
+
+<body class="fix-header">
+    <!-- ============================================================== -->
+    <!-- Preloader -->
+    <!-- ============================================================== -->
+    <div class="preloader">
+        <svg class="circular" viewBox="25 25 50 50">
+            <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" />
+        </svg>
+    </div>
+    <!-- ============================================================== -->
+    <!-- Wrapper -->
+    <!-- ============================================================== -->
+    <div id="wrapper">
+        <!-- ============================================================== -->
+        <!-- Topbar header - style you can find in pages.scss -->
+        <!-- ============================================================== -->
+        <nav class="navbar navbar-default navbar-static-top m-b-0">
+            <div class="navbar-header" style="    background: #ec4c00;">
+                <div class="top-left-part" style="border-bottom: 4px solid #ec4c00;    background-color: #ec4c00;    border-bottom-left-radius: 35px;">
+                    <!-- Logo -->
+                    <a class="logo" href="index.php">
+                        <!-- Logo icon image, you can use font-icon also --><b>
+              <!--This is dark logo icon--><img src="plugins/images/logo.png" alt="home" style="    width: 50px;" class="dark-logo" /><!--This is light logo icon--><img src="plugins/images/logo.png" style="    width: 50px;" alt="home" class="light-logo" />
+                               </b>
+                        <!-- Logo text image you can use text also --><span class="hidden-xs">
+                      <!--This is light logo text--><h3 class="light-logo" style="    font-family: initial;
+    font-weight: bold;color:white;font-size:20px;"><?php echo $_SESSION['uname'];?>&nbsp;&nbsp;Admin</h3>
+                     </span> </a>
+                </div>
+                <!-- /Logo -->
+                <ul class="nav navbar-top-links navbar-right pull-right">
+                   
+                    <li>
+                        <a class="profile-pic" href="logout.php"> <img src="plugins/images/logout.png" alt="user-img" width="36" ><b class="hidden-xs">LogOut</b></a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-header -->
+            <!-- /.navbar-top-links -->
+            <!-- /.navbar-static-side -->
+        </nav>
+        <!-- End Top Navigation -->
+        <!-- ============================================================== -->
+        <!-- Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        <div class="navbar-default sidebar" role="navigation">
+            <div class="sidebar-nav slimscrollsidebar">
+                <div class="sidebar-head">
+                    <h3><span class="fa-fw open-close"><i class="ti-close ti-menu"></i></span> <span class="hide-menu">Navigation</span></h3>
+                </div>
+               <ul class="nav" id="side-menu">
+                    <li style="padding: 70px 0 0;">
+                        <a href="index.php" class="waves-effect"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i>Dashboard</a>
+                    </li>
+                    <li>
+                        <a href="insert.php" class="waves-effect"><i class="fa fa-upload fa-fw" aria-hidden="true"></i>File Upload</a>
+                    </li>
+                    <li>
+                        <a href="report.php" class="waves-effect"><i class="fa fa-table fa-fw" aria-hidden="true"></i>Report Details</a>
+                    </li>
+                   <li>
+                        <a href="working.php" class="waves-effect"><i class="material-icons">layers </i> Working  Details</a>
+                    </li>
+					<li>
+                        <a href="not_working.php" class="waves-effect"><i class="material-icons">layers_clear</i> Not Working Details</a>
+                    </li>
+					<li>
+                        <a href="monthly_report.php" class="waves-effect"><i class="material-icons">date_range</i> Monthly Report</a>
+                    </li>
+                </ul>
+               
+            </div>
+            
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Left Sidebar -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Page Content -->
+        <!-- ============================================================== -->
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                        <div class="row">
+                    <div class="col-md-4 col-xs-12" style="    min-width: 50.333333%;
+    left: 150px;    padding-left: 0px;
+    padding-right: 0px;" >
+                        <div class="white-box">
+                           
+                         
+                                <div class="col-md-4 col-sm-4 text-center">
+                                  <div id="chart" ></div>
+								</div>
+                               
+                            
+                        </div>
+                    </div>
+                    <div class="col-md-8 col-xs-12" style="    width: 50.666667%;    left:150px; bottom:65px;  padding-left: 0px;
+    padding-right: 0px;">
+                        <div class="white-box">
+                           
+                                <div class="col-md-4 col-sm-4 text-center" style="    width: 52.333333%;">
+                                  <div id="chart1" ></div>
+									</div>
+                            </div>   
+                    </div>
+                </div>
+              
+            </div>
+			      <!-- /.container-fluid -->
+            <footer class="footer text-center"> 2017 &copy; Plexus.net.in</footer>
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Page Content -->
+        <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Wrapper -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- All Jquery -->
+    <!-- ============================================================== -->
+    <script src="plugins/bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- Menu Plugin JavaScript -->
+    <script src="plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js"></script>
+    <!--slimscroll JavaScript -->
+    <script src="js/jquery.slimscroll.js"></script>
+    <!--Wave Effects -->
+    <script src="js/waves.js"></script>
+    <!--Counter js -->
+    <script src="plugins/bower_components/waypoints/lib/jquery.waypoints.js"></script>
+    <script src="plugins/bower_components/counterup/jquery.counterup.min.js"></script>
+    <!-- chartist chart -->
+    <script src="plugins/bower_components/chartist-js/dist/chartist.min.js"></script>
+    <script src="plugins/bower_components/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.min.js"></script>
+    <!-- Sparkline chart JavaScript -->
+    <script src="plugins/bower_components/jquery-sparkline/jquery.sparkline.min.js"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="js/custom.min.js"></script>
+    <script src="js/dashboard1.js"></script>
+    <script src="plugins/bower_components/toast-master/js/jquery.toast.js"></script>
+</body>
+
+</html>
+<?php
+include('conn.php');
+
+$sql  = "SELECT * FROM `bangalore_chart_report` where Name LIKE '%total%'";
+$res=$conn->query($sql);
+while($row=mysqli_fetch_assoc($res))
+{
+?>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
+ <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+ 
+<script>
+/**
+ * Selector for chart element.
+ */
+var chartSelector = '#chart';
+var chartSelector1 = '#chart1';
+
+
+/**
+ * Selector used to get label elements inside the rendered chart.
+ * Your mileage may vary if you configure your chart different than
+ * me. Use Firebug or Developer Tools to step through the SVG and
+ * determine your label selector.
+ */
+var labelSelector = '> g:eq(1) g text';
+
+/**
+ * This is our data. For simplicity sake, doing inline and not AJAX.
+ */
+var data = [
+  [ 'Single Tables', <?php echo $row['Single Tables'];?>],
+  [ 'Double Tables', <?php echo $row['Double Tables'];?> ],
+  [ 'Rolling Chairs', <?php echo $row['Rolling Chairs'];?> ],
+  [ 'Normal Chairs', <?php echo $row['Normal Chairs'];?> ],
+  [ 'Plastic Chairs', <?php echo $row['Plastic Chairs'];?> ]
+];
+var labelSelector1 = '> g:eq(1) g text';
+
+var data1 = [
+  [ 'CPU / JAI', <?php echo $row['CPU/JAI'];?> ],
+  [ 'CPU / HP', <?php echo $row['CPU/HP'];?> ],
+  [ 'Monitor', <?php echo $row['Monitor'];?>],
+  [ 'Keyboard', <?php echo $row['Keyboard'];?> ],
+  [ 'Mouse', <?php echo $row['Mouse'];?> ],
+  [ 'Adapter', <?php echo $row['Adapter'];?>],
+  [ 'Power Cable', <?php echo $row['Power Cable'];?> ],
+  [ 'VGA', <?php echo $row['VGA'];?> ],
+  [ 'Junction Box', <?php echo $row['Junction Box'];?> ],
+  [ 'Printer', <?php echo $row['Printer'];?> ],
+  [ 'Scanner', <?php echo $row['Scanner'];?> ]
+  
+];
+
+
+// Load Google Charts 
+google.charts.load('visualization', '1.1', { packages: ['corechart', 'line'] });
+
+// Callback when API is ready
+google.charts.setOnLoadCallback(function() {
+ 
+  /*
+   * Setup the data table with your data. 
+   */
+  var table = new google.visualization.DataTable({
+    cols : [
+      { id : 'name', label : 'Name', type : 'string' },
+      { id : 'value', label : 'Value', type : 'number' }
+    ]
+  });
+   var table1 = new google.visualization.DataTable({
+    cols : [
+      { id : 'name', label : 'Name', type : 'string' },
+      { id : 'value', label : 'Value', type : 'number' }
+    ]
+  });
+  // Add data to the table
+  table.addRows( data );
+  table1.addRows( data1 );
+  // Google Charts needs a raw element. I'm using jQuery to get the chart
+  // Container, then indexing into it to get the raw element.
+  var chartContainer = $(chartSelector)[0];
+  var chartContainer1 = $(chartSelector1)[0];
+  
+  // Create the Google Pie Chart
+  var chart = new google.visualization.PieChart(chartContainer);
+  var chart1 = new google.visualization.PieChart(chartContainer1);
+  
+  // Draw the chart.
+  chart.draw(table, { title : '<?php echo $_SESSION['uname']; ?> Table Reports','width':800,
+                       'height':550 });
+  chart1.draw(table1, { title : '<?php echo $_SESSION['uname'];?> CPU Reports','width':800,
+                       'height':550 });
+  
+  /*
+   * This is the meat and potatoes of the operation. We really require
+   * two things: #1) A selector that will get us a list of labels in the
+   * legend, and #2) The DataTable powering the chart.  We'll cycle
+   * through the labels, and use their index to lookup their value.
+   * If you have some higher-level math you need to do to display a
+   * different value, you can just replace my logic to get the count
+   * with your's.
+   */
+  
+  // The <svg/> element rendered by Google Charts
+  var svg = $('svg', chartContainer );
+  var svg1 = $('svg', chartContainer1 );
+  
+  /*
+   * Step through all the labels in the legend.
+   */
+  $(labelSelector, svg).each(function (i, v) {
+  
+    /*
+     * I'm retrieving the value of the second column in my data table,
+     * which contains the number that I want to display. If your logic
+     * is more complicated, change this line to calculate a new total.
+     */
+    var total = table.getValue(i, 1);
+    
+    // The new label text.
+    var newLabel = $(this).text() + '(' + total + ')';
+	
+    // Update the label text.
+    $(this).text( newLabel );
+  });
+  $(labelSelector1, svg1).each(function (i, v) {
+  
+    /*
+     * I'm retrieving the value of the second column in my data table,
+     * which contains the number that I want to display. If your logic
+     * is more complicated, change this line to calculate a new total.
+     */
+    var total1 = table1.getValue(i, 1);
+    
+    // The new label text.
+    var newLabel1 = $(this).text() + '(' + total1 + ')';
+	
+    // Update the label text.
+    $(this).text( newLabel1 );
+  });
+  
+});
+
+</script>
+
+<?php
+}
+	}
+
+
+}
+
+?>
+
+
+
